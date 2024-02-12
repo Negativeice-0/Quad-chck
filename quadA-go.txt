@@ -1,0 +1,45 @@
+// quadA.go
+package main
+
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
+func QuadA(x, y int) {
+	if x <= 0 || y <= 0 {
+		return
+	}
+	for i := 0; i < y; i++ {
+		for j := 0; j < x; j++ {
+			if (i == 0 && j == 0) || (i == 0 && j == x-1) || (i == y-1 && j == 0) || (i == y-1 && j == x-1) {
+				fmt.Print("o")
+			} else if i == 0 || i == y-1 {
+				fmt.Print("-")
+			} else if j == 0 || j == x-1 {
+				fmt.Print("|")
+			} else {
+				fmt.Print(" ")
+			}
+		}
+		fmt.Println()
+	}
+}
+
+func main() {
+	if len(os.Args) != 3 {
+		fmt.Println("Error")
+		return
+	}
+
+	x, errX := strconv.Atoi(os.Args[1])
+	y, errY := strconv.Atoi(os.Args[2])
+
+	if errX != nil || errY != nil {
+		fmt.Println("Invalid input")
+		return
+	}
+	QuadA(x, y)
+	fmt.Printf("[quadA] [%d, %d]\n", x, y)
+}
